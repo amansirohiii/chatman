@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import {FaGithub} from 'react-icons/fa'
 import { signIn } from "next-auth/react";
+import { useToast } from "@/components/ui/use-toast"
 
 const Signin = () => {
   const [isLoadingGoogle, setIsLoadingGoogle] = useState<boolean>(false);
   const [isLoadingGithub, setIsLoadingGithub] = useState<boolean>(false);
+  const { toast }: any = useToast()
+
   async function loginWithGoogle() {
     setIsLoadingGoogle(true);
     try{
@@ -17,13 +20,31 @@ const Signin = () => {
       console.log(err)
     }finally{
       setIsLoadingGoogle(false)
+      // toast({
+      //   variant: "default",
+      //   title: "You're signed in.",
+      //   // description: "There was a problem with your request."
+      // })
     }
 
   }
-  function loginWithGithub() {
+  async function loginWithGithub() {
     setIsLoadingGithub(true);
-    // await signIn()
-    setIsLoadingGithub(false);
+    try{
+      await signIn('github')
+
+    }catch(err){
+      console.log(err)
+    }finally{
+      setIsLoadingGithub(false)
+      // toast({
+      //   variant: "default",
+      //   title: "You're signed in.",
+      //   // description: "There was a problem with your request."
+      // })
+
+    }
+
   }
   return (
     <>
