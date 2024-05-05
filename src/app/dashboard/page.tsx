@@ -1,9 +1,14 @@
+import { authOptions } from '@/lib/auth'
+import { getServerSession } from 'next-auth'
 import React from 'react'
 
-const page = () => {
+
+const Dashboard = async() => {
+
+  const session = await getServerSession(authOptions)
   return (
-    <div>page</div>
+    <div>{JSON.stringify(session)}</div>
   )
 }
 
-export default page
+export default Dashboard;
