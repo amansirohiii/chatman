@@ -5,6 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import {FaGithub} from 'react-icons/fa'
 import { signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast"
+import Image from "next/image";
 
 const Signin = () => {
   const [isLoadingGoogle, setIsLoadingGoogle] = useState<boolean>(false);
@@ -51,7 +52,7 @@ const Signin = () => {
       <div className="flex min-h-screen items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col items-center max-w-md space-y-8">
           <div className="flex flex-col items-center gap-8">
-            logo
+<Image src="/chatman.svg" alt="Chatman Logo" width={200} height={200} />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Sign in to your Account
             </h2>
