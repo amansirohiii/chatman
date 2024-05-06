@@ -8,6 +8,7 @@ import { Icon, Icons } from "@/components/ui/Icons";
 import SignOutButton from "@/components/SignOutButton";
 import FriendRequestsSidebarOptions from "@/components/FriendRequestsSidebarOptions";
 import { fetchRedis } from "@/helpers/redis";
+import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
 
 interface LayoutProps {
   children: ReactNode;
@@ -40,7 +41,7 @@ const sidebarOptions: SidebarOptions[] = [
   {
     id: 4,
     name: "Chats",
-    href: "/dashboard/chats",
+    href: "/dashboard/chat",
     Icon: "Logo",
   },
   {
@@ -53,7 +54,10 @@ const sidebarOptions: SidebarOptions[] = [
 
 const Layout = async ({ children }: LayoutProps) => {
   const session = await getServerSession(authOptions);
-  if (!session) redirect("/auth/signin");
+  if (!session) redirect("/auth/login");
+
+  const friends = await getFriendsByUserId(session.user.id)
+  console.log(friends)
   const unseenRequestCount = (await fetchRedis("smembers",`user:${session.user.id}:incoming_friend_requests`) as User[]).length;
   return (
     <div className="w-full flex h-screen">
@@ -69,7 +73,7 @@ const Layout = async ({ children }: LayoutProps) => {
         </div>
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
-            <li>/chats </li>
+            <li>{friends[0].name} </li>
             <li>
               <div className="text-xs font-semibold leading-6 text-gray-400">
                 Overview
