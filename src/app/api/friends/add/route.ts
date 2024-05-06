@@ -9,6 +9,7 @@ import { z } from "zod";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log(body);
     const { email: emailToAdd } = addFriendValidator.parse(body.data.email);
     const RESTResponse = await fetch(
       `${process.env.UPSTASH_REDIS_REST_URL}/get/user:email:${emailToAdd}`,
