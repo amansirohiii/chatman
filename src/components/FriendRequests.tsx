@@ -19,7 +19,6 @@ const FriendRequests: FC<FriendRequestsProps> = ({incomingFriendRequests, sessio
 
 
     useEffect(() => {
-        console.log("use effect")
         pusherClient.subscribe(
           toPusherKey(`user:${sessionId}:incoming_friend_requests`)
         )
@@ -37,7 +36,7 @@ const FriendRequests: FC<FriendRequestsProps> = ({incomingFriendRequests, sessio
           )
           pusherClient.unbind('incoming_friend_requests', friendRequestHandler)
         }
-      }, [])
+      }, [sessionId])
 
     const acceptFriend = async(senderId: string)=>{
         try {
@@ -45,7 +44,8 @@ const FriendRequests: FC<FriendRequestsProps> = ({incomingFriendRequests, sessio
         setFriendRequests((prev)=>
             prev.filter((request)=> request.senderId !== senderId)
     )
-        router.refresh();
+        // router.refresh();
+        location.reload()
         toast({
             variant: "success",
             title: "Friend Request Accepted",
@@ -60,7 +60,9 @@ const FriendRequests: FC<FriendRequestsProps> = ({incomingFriendRequests, sessio
         setFriendRequests((prev)=>
             prev.filter((request)=> request.senderId !== senderId)
     )
-        router.refresh();
+        // router.refresh();
+        location.reload()
+
         toast({
             variant: "destructive",
             title: "Friend Request Declined",

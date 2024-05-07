@@ -87,7 +87,7 @@ const page = async ({ params }: pageProps) => {
           </div>
         </div>
       </div>
-      <Messages sessionImg={session.user.image} chatPartner={chatPartner} initialMessages={initialMessages} sessionId={session.user.id}/>
+      <Messages sessionImg={session.user.image} chatPartner={chatPartner} initialMessages={initialMessages} sessionId={session.user.id} chatId={chatId}/>
       <ChatInput chatPartner={chatPartner} chatId={chatId}/>
     </div>
   );

@@ -25,7 +25,9 @@ const Layout = async ({ children }: LayoutProps) => {
   return (
     <div className="w-full flex h-screen">
       <Sidebar session={session} friends={friends} unseenRequestCount={unseenRequestCount}/>
-      {children}
+      <aside className='max-h-screen container py-16 md:py-12 w-full'>
+        {children}
+      </aside>
     </div>
   );
 };
