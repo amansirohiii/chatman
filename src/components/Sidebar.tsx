@@ -56,7 +56,6 @@ const sidebarOptions: SidebarOptions[] = [
 ];
 
 const Sidebar = ({session, friends, unseenRequestCount}: SidebarProps ) => {
-  console.log(session)
 
 return (
     <div className="flex h-full w-full max-w-xs grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 ">
