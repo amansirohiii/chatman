@@ -60,8 +60,12 @@ const page = async ({ params }: pageProps) => {
   const [userId1, userId2] = chatId.split("--");
   if (user.id !== userId1 && user.id !== userId2) notFound();
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
-  const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User;
-  const initialMessages = await getChatMessages(chatId);
+  const chatPartnerRaw = (await fetchRedis(
+    'get',
+    `user:${chatPartnerId}`
+  )) as string
+  const chatPartner = JSON.parse(chatPartnerRaw) as User
+  const initialMessages = await getChatMessages(chatId)
   return (
     <div className="flex-1 justify-between flex flex-col md:h-full md:max-h-[calc(100vh-6rem)] h-[calc(100vh-10rem)] ">
       <div className="flex sm:items-center justify-between md:py-3 border-b-2 border-gray-200">
