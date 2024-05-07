@@ -54,8 +54,10 @@ const Signin = () => {
           <div className="flex flex-col items-center gap-8">
 <Image src="/chatman.svg" alt="Chatman Logo" width={200} height={200} />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-              Sign in to your Account
+              Chatman
             </h2>
+            <p className="text-center text-sm text-gray-600">
+              Sign in to your account</p>
           </div>
           <Button
             isLoading={isLoadingGoogle}

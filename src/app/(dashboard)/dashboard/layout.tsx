@@ -5,7 +5,8 @@ import { ReactNode } from "react";
 
 import { fetchRedis } from "@/helpers/redis";
 import { getFriendsByUserId } from "@/helpers/get-friends-by-user-id";
-import Sidebar from "@/components/Sidebar";
+import Sidebar, { sidebarOptions } from "@/components/Sidebar";
+import MobileChatLayout from "@/components/MobileChatLayout";
 
 interface LayoutProps {
   children: ReactNode;
@@ -24,8 +25,16 @@ const Layout = async ({ children }: LayoutProps) => {
   ).length;
   return (
     <div className="w-full flex h-screen">
+      <div className="md:hidden">
+        <MobileChatLayout
+          friends={friends}
+          session={session}
+          sidebarOptions={sidebarOptions}
+          unseenRequestCount={unseenRequestCount}
+        />
+      </div>
       <Sidebar session={session} friends={friends} unseenRequestCount={unseenRequestCount}/>
-      <aside className='max-h-screen container py-16 md:py-12 w-full'>
+      <aside className='max-h-[calc(100vh-10rem)] md:max-h-screen container pt-16 overscroll-none md:py-12 w-full'>
         {children}
       </aside>
     </div>
