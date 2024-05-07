@@ -15,6 +15,7 @@ const AddFriendButton = () => {
 
   const [showSuccessState, setShowSuccessState] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const [isAdding, setIsAdding] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -26,6 +27,7 @@ const AddFriendButton = () => {
   const addFriend = async (email: string) => {
 
     try {
+      setIsAdding(true)
       const validatedEmail = addFriendValidator.parse({ email });
       const res = await axios.post("/api/friends/add", {
         data: {email: validatedEmail,}
@@ -46,6 +48,8 @@ const AddFriendButton = () => {
         variant: "destructive",
         title: err.response.data.message,
       });
+    }finally{
+      setIsAdding(false)
     }
   };
   const handleChange = () => {
@@ -72,7 +76,7 @@ const AddFriendButton = () => {
           placeholder="aman@gmail.com"
           onChange={handleChange}
         />
-        <Button>Add</Button>
+        <Button disabled={isAdding} isLoading={isAdding}>Add</Button>
       </div>
       <p className="mt-1 text-sm text-red-600">{errors.email?.message}</p>
       {showSuccessState ? (
