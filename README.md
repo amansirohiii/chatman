@@ -1,5 +1,5 @@
 # Chatman
-Chatman is a real-time chat application built with Next.js, Redis, NextAuth, Pusher.js, Typrescript, Tailwind CSS.
+Chatman is a real-time chat application built with Next.js, Redis, NextAuth, Pusher.js, Typrescript and Tailwind CSS.
 
 ## Features
 - Real-time messaging: Experience seamless real-time messaging with Pusher.js integration.
@@ -15,7 +15,7 @@ Chatman is a real-time chat application built with Next.js, Redis, NextAuth, Pus
 ## Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/nextchat.git
+git clone https://github.com/amansirohiii/chatman.git
 ```
 2. Install dependencies:
 ```bash
